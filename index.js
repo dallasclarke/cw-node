@@ -34,7 +34,11 @@ const server = http.createServer((request, response) => {
         const readStream3 = fs.createReadStream(__dirname + '/about.html');
         readStream3.pipe(response);
     }
-    else if (request.url === '')
+    else {
+        response.writeHead(404, {'content-type': 'text/plain'});
+        const readStream4 = fs.createReadStream(__dirname + '/error.txt');
+        readStream4.pipe(response);
+    }
 
     // response.writeHead(200, {'Content-Type': 'application/json'});       
     // response.end('This is my first node server')
